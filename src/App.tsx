@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from 'react'
+import Preloader from './components/common/Preloader'
+import { Route, Switch, withRouter } from 'react-router-dom'
+import { Navigation } from './components/common/Navbar'
+import { Col } from 'antd'
+
+const Users = lazy(() => import('./components/Users'))
+const Posts = lazy(() => import('./components/Posts'))
+const Albums = lazy(() => import('./components/Albums'))
+const Photos = lazy(() => import('./components/Photos'))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Col span={12} offset={6}>
+      <Navigation/>
+      <Suspense fallback={<Preloader/>}>
+        <Switch>
+          <Route path='/users' render={() => <Users/>}/>
+          <Route path='/posts' render={() => <Posts/>}/>
+          <Route path='/albums/:id' render={() => <Photos/>}/>
+          <Route path='/albums' render={() => <Albums/>}/>
+          <Route path='*' render={() => <Users/>}/>
+        </Switch>
+      </Suspense>
+        </Col>
+    </>
+  )
 }
 
-export default App;
+export default withRouter(App)

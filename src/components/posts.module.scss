@@ -1,0 +1,26 @@
+.addPostForm {
+  margin-bottom: 1.5rem;
+
+  .addPostFieldWrap {
+    display: flex;
+  }
+
+  input {
+    width: 500px;
+    margin-bottom: 1rem;
+  }
+
+  textarea {
+    width: 500px;
+    min-height: 150px;
+    margin-bottom: 1rem;
+  }
+
+  .errorWrap {
+    height: 32px;
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+}
